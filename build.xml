@@ -3,17 +3,16 @@
     <property name="lib.dir" value="lib" />
     <property name="build.dir" value="target" />
     <property name="src.dir" value="src/main/java/org/continuous_security" />
+    
+    <property name="ivy.install.version" value="2.4.0" />
+    <condition property="ivy.home" value="${env.IVY_HOME}">
+      <isset property="env.IVY_HOME" />
+    </condition>
+    <property name="ivy.home" value="${user.home}/.ant" />
+    <property name="ivy.jar.dir" value="${ivy.home}/lib" />
+    <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
 
-    <!-- paths used for compilation and run  -->
-    <path id="lib.path.id">
-        <fileset dir="${lib.dir}" />
-	</path>
-    <path id="run.path.id">
-        <path refid="lib.path.id" />
-        <path location="${build.dir}" />
-    </path>
-
-        <target name="download-ivy" unless="offline">
+    <target name="download-ivy" unless="offline">
 
         <mkdir dir="${ivy.jar.dir}"/>
         <!-- download Ivy from web site so that it can be used even without any special installation -->
@@ -33,12 +32,36 @@
         <taskdef resource="org/apache/ivy/ant/antlib.xml"
                  uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
     </target>
+
+    <!-- paths used for compilation and run  -->
+    <path id="lib.path.id">
+        <fileset dir="${lib.dir}" />
+	</path>
+    <path id="run.path.id">
+        <path refid="lib.path.id" />
+        <path location="${build.dir}" />
+    </path>
+
+	
+    <!-- =================================
+          target: dependencytree
+         ================================= -->
+  <target name="get-deps" description="o Retrieve dependencies" depends="init-ivy" unless="noget">
+    <ivy:retrieve pattern="$${lib.dir}/[artifact]-[revision].[ext]" sync="true" type="jar"/>
+    <path id="project.classpath">
+      <fileset dir="${lib.dir}" includes="*.jar"/>
+    </path>
+  </target>
 	
     <!-- =================================
           target: resolve
          ================================= -->
-    <target name="resolve" description="--> retrieve dependencies with ivy">
-        <ivy:retrieve/>
+   <target name="resolve" description="--> retrieve dependencies with ivy">
+  	<ivy:retrieve/>
+	   <!--<ivy:resolve file="~/ivy.xml" type="jar"/>-->
+    </target>
+   <target name="dependencytree"  description="--> retrieve dependency tree">
+  	<ivy:dependencytree />
     </target>
 
     <!-- =================================
@@ -64,7 +87,6 @@
         	<arg value="FirstAndOnlyArg"/>
     	</java>
     </target>
-
     <!-- =================================
           target: clean
          ================================= -->
@@ -96,4 +118,5 @@
 	<target name="clean-cache" description="--> clean the ivy cache">
 		<ivy:cleancache />
 	</target>
+
 </project>
