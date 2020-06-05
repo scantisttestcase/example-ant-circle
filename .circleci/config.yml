@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: gradle
+
+    steps:
+      - checkout
+       - run: 
+          name: install
+          command: |
+            ls /home/circleci/.ant/lib
+            ls /opt/apache-ant/lib
+            ls /home
+            ls /opt
+            
+      - run: 
+          name: install dependencies
+          command: |
+            sudo su -c 'echo "deb http://deb.debian.org/debian jessie-backports main" >> /etc/apt/sources.list'
+            sudo rm -rf /var/lib/apt/lists/*
+            sudo apt-get update
+            sudo apt install -t jessie-backports  openjdk-8-jre-headless ca-certificates-java
