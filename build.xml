@@ -118,5 +118,7 @@
 	<target name="clean-cache" description="--> clean the ivy cache">
 		<ivy:cleancache />
 	</target>
+	
+	<dependencytree/>
 
 </project>
