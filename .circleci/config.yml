@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/ant-with-ivy
     docker:
       - image: gradle
 
