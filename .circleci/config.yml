@@ -6,7 +6,7 @@ jobs:
 
     steps:
       - checkout
-       - run: 
+      - run: 
           name: install
           command: |
             ls /home/circleci/.ant/lib
