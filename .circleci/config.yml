@@ -1,20 +1,11 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/ant-with-ivy
     docker:
       - image: gradle
 
     steps:
-      - checkout
-      - run: 
-          name: install
-          command: |
-            ls /home/circleci/.ant/lib
-            ls /opt/apache-ant/lib
-            ls /home
-            ls /opt
-            
+      - checkout            
       - run: 
           name: install dependencies
           command: |
