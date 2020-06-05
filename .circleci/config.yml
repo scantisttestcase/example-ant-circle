@@ -11,3 +11,4 @@ jobs:
           command: |
             ant init-ivy
             ant resolve
+            ant dependencytree
