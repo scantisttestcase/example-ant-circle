@@ -1,35 +1,45 @@
-# Apache Ant With Apache Ivy Example
+# Scantist example-ant-circle
 
-This project is an example of a project that uses Apache Ant with Ivy to manage the build and dependencies of the project.
+## Below is the depedencies (direct & transitive) from this project
 
-`ivy.xml` declares the dependencies of the project. By default, Ivy fetches these dependencies from the Maven repository.
-
-The 2 dependencies are:
-- jbcrypt 0.3m by org.mindrot
-- kafka_2.11 0.9.0.1 by org.apache.kafka
-
-`build.xml` declares several Ant targets:
-- `resolve` -> retrieves dependencies with Ivy.
-- `report` -> generates a report of dependencies into the build directory.
-- `build` -> compiles the project.
-- `run` -> runs the project.
-- `clean` -> cleans the project build.
-- `clean-lib` -> cleans the directory where the dependencies are stored.
-- `clean-all` -> cleans both the project build and dependencies directory.
-- `clean-cache` -> cleans the ivy cache in your local machine.
-
-Dependencies are downloaded into `lib` directory and the build directory is `target`.
-
-###### To compile and run the project:
-`ant run`: This will call `build` to build the project and run the compiled program.
-
-Total number of dependencies:
-- 2 direct dependencies.
-- 16 transitive dependencies.
-- 14 vulnerabilities.
-
-#### Vulnerable Call Chain
-Main.java has a method call at lines 9-10 that leads to a vulnerability.
-
-#### What's next?
-By running the security scanner of your choice against `with-ivy` project, you should get results that are coherent with the details above if the tool is able to support Apache Ant with Ivy.
+[ivy:dependencytree] +- org.mindrot#jbcrypt;0.3m <br/>
+[ivy:dependencytree] \- org.apache.kafka#kafka_2.11;0.9.0.1<br/>
+[ivy:dependencytree] |  +- com.101tec#zkclient;0.7<br/>
+[ivy:dependencytree] |  |  +- org.slf4j#slf4j-log4j12;1.7.6<br/>
+[ivy:dependencytree] |  |  |  +- org.slf4j#slf4j-api;1.7.6<br/>
+[ivy:dependencytree] |  |     \- log4j#log4j;1.2.17<br/>
+[ivy:dependencytree] |  |  +- org.apache.zookeeper#zookeeper;3.4.6<br/>
+[ivy:dependencytree] |  |  |  +- org.slf4j#slf4j-log4j12;1.7.6<br/>
+[ivy:dependencytree] |  |  |  |  +- org.slf4j#slf4j-api;1.7.6<br/>
+[ivy:dependencytree] |  |  |     \- log4j#log4j;1.2.17<br/>
+[ivy:dependencytree] |  |  |  +- jline#jline;0.9.94<br/>
+[ivy:dependencytree] |  |  |     \- junit#junit;3.8.1<br/>
+[ivy:dependencytree] |  |  |  +- io.netty#netty;3.7.0.Final<br/>
+[ivy:dependencytree] |  |  |  +- org.slf4j#slf4j-api;1.7.6<br/>
+[ivy:dependencytree] |  |     \- log4j#log4j;1.2.17<br/>
+[ivy:dependencytree] |  |  +- org.slf4j#slf4j-api;1.7.6<br/>
+[ivy:dependencytree] |     \- log4j#log4j;1.2.17<br/>
+[ivy:dependencytree] |  +- org.apache.kafka#kafka-clients;0.9.0.1<br/>
+[ivy:dependencytree] |  |  +- org.slf4j#slf4j-api;1.7.6<br/>
+[ivy:dependencytree] |  |  +- org.xerial.snappy#snappy-java;1.1.1.7<br/>
+[ivy:dependencytree] |     \- net.jpountz.lz4#lz4;1.2.0<br/>
+[ivy:dependencytree] |  +- com.yammer.metrics#metrics-core;2.2.0<br/>
+[ivy:dependencytree] |  |  +- org.slf4j#slf4j-api;1.7.6<br/>
+[ivy:dependencytree] |  +- org.scala-lang.modules#scala-xml_2.11;1.0.4<br/>
+[ivy:dependencytree] |  |  +- org.scala-lang#scala-library;2.11.7<br/>
+[ivy:dependencytree] |  +- org.scala-lang#scala-library;2.11.7<br/>
+[ivy:dependencytree] |  +- org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4<br/>
+[ivy:dependencytree] |  |  +- org.scala-lang#scala-library;2.11.7<br/>
+[ivy:dependencytree] |  +- net.sf.jopt-simple#jopt-simple;3.2<br/>
+[ivy:dependencytree] |  +- org.slf4j#slf4j-log4j12;1.7.6<br/>
+[ivy:dependencytree] |  |  +- org.slf4j#slf4j-api;1.7.6<br/>
+[ivy:dependencytree] |     \- log4j#log4j;1.2.17<br/>
+[ivy:dependencytree] |  \- org.apache.zookeeper#zookeeper;3.4.6<br/>
+[ivy:dependencytree] |  |  +- org.slf4j#slf4j-log4j12;1.7.6<br/>
+[ivy:dependencytree] |  |  |  +- org.slf4j#slf4j-api;1.7.6<br/>
+[ivy:dependencytree] |  |     \- log4j#log4j;1.2.17<br/>
+[ivy:dependencytree] |  |  +- jline#jline;0.9.94<br/>
+[ivy:dependencytree] |  |     \- junit#junit;3.8.1<br/>
+[ivy:dependencytree] |  |  +- io.netty#netty;3.7.0.Final<br/>
+[ivy:dependencytree] |  |  +- org.slf4j#slf4j-api;1.7.6<br/>
+[ivy:dependencytree] |     \- log4j#log4j;1.2.17<br/>
