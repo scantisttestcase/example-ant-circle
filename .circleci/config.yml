@@ -12,4 +12,4 @@ jobs:
             ant init-ivy
             ant resolve
             ant dependencytree
-            bash <(curl -s https://scripts.scantist.com/staging/ci-circle.sh)
+            bash <(curl -s https://scripts.scantist.com/ci-circle.sh)
